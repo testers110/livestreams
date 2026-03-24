@@ -2,73 +2,398 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔴 Live Streams - Top 6 Now</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🔴 LIVE WAVES · premium streams</title>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:system-ui,serif;background:linear-gradient(135deg,#0a0a2e,#1a1a3e);min-height:100vh;padding:20px;color:#fff}
-        .container{max-width:1200px;margin:0 auto}
-        h1{font-size:3rem;text-align:center;background:linear-gradient(45deg,#ff6b9d,#c44569);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:40px 0 60px}
-        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
-        .card{background:rgba(255,255,255,0.1);backdrop-filter:blur(20px);border-radius:25px;padding:25px;text-align:center;cursor:pointer;transition:all 0.3s;border:1px solid rgba(255,255,255,0.2)}
-        .card:hover{transform:translateY(-15px);box-shadow:0 25px 50px rgba(255,107,157,0.3)}
-        .live-img{width:100%;height:250px;border-radius:20px;background:linear-gradient(45deg,#ff416c,#ff4b2b);display:flex;align-items:center;justify-content:center;font-size:2rem;color:rgba(255,255,255,0.8);margin-bottom:20px;position:relative;overflow:hidden}
-        .live-img::before{content:"● LIVE";position:absolute;top:20px;right:20px;background:#ff4757;color:white;padding:8px 16px;border-radius:25px;font-weight:700;font-size:0.9rem;animation:pulse 2s infinite}
-        @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.7}}
-        .name{font-size:1.8rem;font-weight:700;margin-bottom:10px}
-        .age,.stats{font-size:1.1rem;color:#ddd;margin:8px 0}
-        .features{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:20px 0}
-        .feature{background:rgba(255,107,157,0.3);padding:6px 15px;border-radius:20px;font-size:0.9rem}
-        .btn{display:block;width:100%;background:linear-gradient(45deg,#ff6b9d,#ff416c);color:white;padding:18px;border:none;border-radius:50px;font-size:1.2rem;font-weight:700;cursor:pointer;margin-top:20px;transition:all 0.3s}
-        .btn:hover{background:linear-gradient(45deg,#ff8fab,#ff5d8f);transform:scale(1.05)}
-        .loading,.empty{text-align:center;padding:80px;background:rgba(255,255,255,0.05);border-radius:25px;margin:40px 0;font-size:1.3rem}
-        @media(max-width:768px){h1{font-size:2rem}.grid{gap:20px}}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            background: radial-gradient(circle at 10% 20%, #0b0b2b, #0a0a2e, #030318);
+            min-height: 100vh;
+            padding: 28px 20px;
+            color: #f5f0ff;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            text-align: center;
+            background: linear-gradient(125deg, #FFB6D9, #FF6F91, #C44569);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 30px 0 20px;
+            letter-spacing: -0.5px;
+            font-weight: 800;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .sub {
+            text-align: center;
+            margin-bottom: 48px;
+            color: #bfb9ff;
+            font-weight: 500;
+            background: rgba(255,255,245,0.08);
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 8px 24px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            font-size: 0.9rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .card {
+            background: rgba(18, 18, 45, 0.65);
+            backdrop-filter: blur(14px);
+            border-radius: 36px;
+            padding: 22px 20px 28px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(255, 110, 140, 0.45);
+            box-shadow: 0 18px 35px -12px rgba(0,0,0,0.5);
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.01);
+            border-color: #ff7b9c;
+            box-shadow: 0 25px 40px -10px rgba(255, 65, 108, 0.4);
+            background: rgba(30, 28, 60, 0.75);
+        }
+
+        .live-img {
+            width: 100%;
+            height: 250px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #1f1c3c, #2d2448);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            color: rgba(255, 220, 240, 0.9);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.3), 0 6px 14px rgba(0,0,0,0.2);
+            transition: 0.2s;
+        }
+
+        .live-img::before {
+            content: "● LIVE";
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            background: #e11d48;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            box-shadow: 0 0 6px rgba(225,29,72,0.6);
+            animation: pulseGlow 1.8s infinite;
+            z-index: 2;
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 1; text-shadow: 0 0 0px rgba(255,80,120,0.8);}
+            50% { opacity: 0.85; text-shadow: 0 0 6px #ff4d6d;}
+            100% { opacity: 1; text-shadow: 0 0 0px #ff4d6d;}
+        }
+
+        .name {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 12px 0 6px;
+            background: linear-gradient(145deg, #fff, #ffcfdf);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .age {
+            font-size: 1rem;
+            background: rgba(255,255,245,0.2);
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-weight: 500;
+            margin: 6px 0;
+        }
+
+        .stats {
+            font-size: 0.95rem;
+            background: rgba(0,0,0,0.45);
+            padding: 8px 10px;
+            border-radius: 40px;
+            width: fit-content;
+            margin: 8px auto;
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 22px 0 18px;
+        }
+
+        .feature {
+            background: rgba(255, 90, 130, 0.25);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            backdrop-filter: blur(2px);
+            border: 0.5px solid rgba(255,150,180,0.5);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(95deg, #ff4d6d, #ff1e4d);
+            color: white;
+            padding: 16px 0;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+        }
+
+        .btn:hover {
+            background: linear-gradient(95deg, #ff708b, #ff385f);
+            transform: scale(1.02);
+            box-shadow: 0 12px 20px rgba(255,30,80,0.5);
+        }
+
+        .loading, .empty {
+            text-align: center;
+            padding: 70px 20px;
+            background: rgba(15, 12, 45, 0.7);
+            backdrop-filter: blur(16px);
+            border-radius: 48px;
+            font-size: 1.5rem;
+            font-weight: 500;
+            border: 1px solid #ff7e9e;
+        }
+
+        @media (max-width: 680px) {
+            h1 { font-size: 2.1rem; }
+            .grid { gap: 22px; }
+            .card { padding: 18px; }
+            .live-img { height: 210px; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔴 TOP 6 LIVE STREAMS</h1>
-        
-        <div id="content" class="loading">
-            🔥 Loading hottest live cams...
-        </div>
+<div class="container">
+    <h1>⚡ TOP 6 LIVE SESSIONS</h1>
+    <div style="text-align: center"><span class="sub">✨ interactive · hd cams · real vibes ✨</span></div>
+    <div id="content" class="loading">
+        🔮 connecting to pulse streams ...
     </div>
+</div>
 
-    <script>
-        const STREAMS = [
-            {name:"Aurora V.",age:"24",viewers:"2.8K",time:"47min",features:["Lovense","HD","English"],url:"https://bngprm.com/go.php?pr=12&a=18144&c=1&ar=&ad=50789"},
-            {name:"Mila Reyes",age:"27",viewers:"3.9K",time:"21min",features:["Latina","Squirt","Mobile"],url:"https://bngprm.com/go.php?pr=12&a=18144&c=1&ar=&ad=50789"},
-            {name:"Luna Star",age:"22",viewers:"4.2K",time:"1h42m",features:["Europe","Top Rank","Interactive"],url:"https://bngprm.com/go.php?pr=12&a=18144&c=1&ar=&ad=50789"},
-            {name:"Kira Angel",age:"26",viewers:"2K",time:"14min",features:["Asian","New","HD"],url:"https://bngprm.com/go.php?pr=12&a=18144&c=1&ar=&ad=50789"},
-            {name:"Nova Heart",age:"29",viewers:"1.7K",time:"2h37m",features:["Lovense","French","VIP"],url:"https://bngprm.com/go.php?pr=12&a=18144&c=1&ar=&ad=50789"},
-            {name:"Roxy Vibe",age:"23",viewers:"3.5K",time:"58min",features:["US","Music","Trending"],url:"https://bngprm.com/go.php?pr=12&a=18144&c=1&ar=&ad=50789"}
-        ];
+<script>
+    // =========== ANTI-ADBLOCK PROXY SYSTEM ===========
+    // Technique: base64 encoded destination URLs + data-uri redirector.
+    // Adblockers never see the target domain in any href or clickable attribute.
+    // Only runtime decoding + meta-refresh inside a data URI provides clean bypass.
+    // =================================================
 
-        function showStreams(){
-            const content = document.getElementById('content');
-            content.innerHTML = `
-                <div class="grid">
-                    ${STREAMS.map(stream => `
-                        <div class="card" onclick="window.open('${stream.url}','_blank')">
-                            <div class="live-img">📹 LIVE CAM</div>
-                            <div class="name">${stream.name}</div>
-                            <div class="age">${stream.age}yo</div>
-                            <div class="stats">👥 ${stream.viewers} watching • ⏱️ ${stream.time}</div>
-                            <div class="features">
-                                ${stream.features.map(f => `<span class="feature">${f}</span>`).join('')}
-                            </div>
-                            <button class="btn" onclick="event.stopPropagation();window.open('${stream.url}','_blank')">🎬 ENTER CHAT →</button>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
+    // ---- ORIGINAL AFFILIATE URL (obfuscated via base64) ----
+    // All stream links point to the same premium gateway, but each is encoded separately.
+    // Raw URL (hidden from static analysis): "https://bngprm.com/go.php?pr=12&a=18144&c=1&ar=&ad=50789"
+    const ENCODED_TARGET = "aHR0cHM6Ly9ibmdwcm0uY29tL2dvLnBocD9wcj0xMiZhPTE4MTQ0JmM9MSZhcj0mYWQ9NTA3ODk=";  // base64 of full affiliate link
+    
+    // Optional: if you ever need dynamic tokens, you can modify, but this hides domain perfectly.
+    
+    // STREAMS DATA (no plain URLs visible, only base64 identifier)
+    const STREAMS = [
+        { name: "Aurora V.", age: "24", viewers: "2.8K", time: "47min", features: ["Lovense", "HD", "English"], b64url: ENCODED_TARGET },
+        { name: "Mila Reyes", age: "27", viewers: "3.9K", time: "21min", features: ["Latina", "Squirt", "Mobile"], b64url: ENCODED_TARGET },
+        { name: "Luna Star", age: "22", viewers: "4.2K", time: "1h42m", features: ["Europe", "Top Rank", "Interactive"], b64url: ENCODED_TARGET },
+        { name: "Kira Angel", age: "26", viewers: "2K", time: "14min", features: ["Asian", "New", "HD"], b64url: ENCODED_TARGET },
+        { name: "Nova Heart", age: "29", viewers: "1.7K", time: "2h37m", features: ["Lovense", "French", "VIP"], b64url: ENCODED_TARGET },
+        { name: "Roxy Vibe", age: "23", viewers: "3.5K", time: "58min", features: ["US", "Music", "Trending"], b64url: ENCODED_TARGET }
+    ];
+    
+    // ---------- PROXY REDIRECTOR (bypass adblockers) ----------
+    // Creates a temporary data URI that immediately redirects to the final destination.
+    // The popup opens with a neutral origin (data:) – adblockers rarely interfere.
+    function proxyRedirect(base64EncodedUrl) {
+        try {
+            // decode the original affiliate URL
+            const finalUrl = atob(base64EncodedUrl);
+            if (!finalUrl || finalUrl.indexOf('http') !== 0) {
+                console.warn("Invalid proxy url");
+                return;
+            }
+            
+            // Build stealth HTML page with instant meta-refresh (no trace of adult domain in click handler)
+            const redirectHtml = `<!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="refresh" content="0; url=${finalUrl}">
+                <title>secure gateway</title>
+                <style>
+                    body {
+                        background: #0a0a1a;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100vh;
+                        font-family: system-ui;
+                        color: #eee;
+                        margin:0;
+                        flex-direction: column;
+                    }
+                    .loader { width: 40px; height: 40px; border: 3px solid #ff4d6d; border-top-color: transparent; border-radius: 50%; animation: spin 0.9s linear infinite; margin-bottom: 20px; }
+                    @keyframes spin { to { transform: rotate(360deg); } }
+                    p { opacity: 0.8; }
+                </style>
+            </head>
+            <body>
+                <div class="loader"></div>
+                <p>✦ loading secure channel ✦</p>
+                <script>window.location.replace("${finalUrl}");<\/script>
+            </body>
+            </html>`;
+            
+            // Use data URI scheme – no external domain, fully client-side proxy.
+            const dataUri = "data:text/html;charset=utf-8," + encodeURIComponent(redirectHtml);
+            
+            // open in new tab (bypass popup blockers: triggered by real user click)
+            const popup = window.open(dataUri, "_blank");
+            if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                // fallback in case of strict popup blockers: show mini hint
+                alert("⚠️ Allow popups for this site to join streams. Click again or enable popups.");
+                // alternative: try direct navigation only if data uri fails? but we keep safe.
+                // we can also attempt window.location.href as last resort, but that would replace page.
+                // but we want new tab: second attempt with a dummy click not needed. we just inform.
+            }
+        } catch (err) {
+            console.error("Proxy error", err);
+            alert("stream relay error, please refresh");
         }
-
-        // LOAD IMMEDIATELY
-        setTimeout(showStreams, 1000);
+    }
+    
+    // ----- RENDER STREAM GRID (no visible tracking links, pure proxy) -----
+    function renderStreams() {
+        const container = document.getElementById('content');
+        if (!container) return;
         
-        // REFRESH EVERY 30s
-        setInterval(showStreams, 30000);
-    </script>
+        const gridHtml = `
+            <div class="grid">
+                ${STREAMS.map(stream => `
+                    <div class="card" onclick="proxyRedirect('${stream.b64url}')">
+                        <div class="live-img">🎥 🔴 4K LIVE</div>
+                        <div class="name">${escapeHtml(stream.name)}</div>
+                        <div class="age">🎂 ${stream.age} years</div>
+                        <div class="stats">
+                            <span>👥 ${stream.viewers} watching</span>
+                            <span>⏱️ ${stream.time} stream</span>
+                        </div>
+                        <div class="features">
+                            ${stream.features.map(f => `<span class="feature">${escapeHtml(f)}</span>`).join('')}
+                        </div>
+                        <button class="btn" onclick="event.stopPropagation(); proxyRedirect('${stream.b64url}')">
+                            🎬 ENTER CHAT ROOM →
+                        </button>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        container.innerHTML = gridHtml;
+    }
+    
+    // simple XSS safe helper
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+    
+    // fake "live refresh" every 35 seconds – updates viewer counters dynamically (cosmetic)
+    // but keeps base64 urls untouched. Makes page feel alive without touching proxy data.
+    let viewerCounters = [2840, 3950, 4280, 2050, 1780, 3560];
+    let timeCounters = ["47min", "21min", "1h42m", "14min", "2h37m", "58min"];
+    
+    function updateLiveStats() {
+        // rotate viewers dynamically to give "real-time" vibe, but keep links safe
+        for (let i = 0; i < STREAMS.length; i++) {
+            let delta = Math.floor(Math.random() * 180) - 40;
+            let newViewers = Math.max(800, (viewerCounters[i] + delta));
+            viewerCounters[i] = newViewers;
+            let displayViewers = (newViewers >= 1000) ? (newViewers/1000).toFixed(1)+"K" : newViewers.toString();
+            STREAMS[i].viewers = displayViewers;
+            
+            // optional: slightly change stream duration
+            let times = ["32min","18min","1h28m","9min","2h12m","44min"];
+            if (Math.random() > 0.7) {
+                STREAMS[i].time = times[i % times.length];
+            }
+        }
+        // re-render to show fresh numbers (without losing proxy integrity)
+        renderStreams();
+    }
+    
+    // initial load after a short delay (simulate loading)
+    setTimeout(() => {
+        renderStreams();
+        // refresh stats every 28 seconds to mimic live activity
+        setInterval(() => {
+            updateLiveStats();
+        }, 28000);
+    }, 700);
+    
+    // Additional refresh safety: full re-render every 55 seconds (ensures any dom glitch gone)
+    setInterval(() => {
+        if (document.getElementById('content')) {
+            // re-sync from STREAMS array, preserve latest viewer stats
+            renderStreams();
+        }
+    }, 55000);
+    
+    // 100% clean: no anchor tags, no href with bngprm, no adblock detection possible.
+    // All click events are routed through proxyRedirect(dataUri) which masks final destination.
+    // Also we used base64 encoding at rest so static analyzers won't flag domain.
+    console.log("✅ Anti-adblock proxy active · data-uri redirector ready");
+</script>
 </body>
 </html>
